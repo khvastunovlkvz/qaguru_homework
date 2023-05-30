@@ -21,7 +21,7 @@ public class BaseTest {
         Configuration.timeout = 4000;
         Configuration.pageLoadStrategy = "none";
         Configuration.browserPosition = "0x0";
-        Configuration.holdBrowserOpen = false;
+        Configuration.holdBrowserOpen = true;
     }
 
     @AfterAll

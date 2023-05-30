@@ -1,59 +1,61 @@
 package qaguru.homework1.tests;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 
 public class FormTest extends BaseTest {
     private final String
-            FIRST_NAME = "Alex",
-            LAST_NAME = "Khvastunov",
-            FIRST_AND_LAST_NAME = FIRST_NAME + " " + LAST_NAME,
-            EMAIL = "ahvastunov@bk.ru",
-            GENDER = "Male",
-            NUMBER = "9290088554",
-            DAY = "26",
-            MONTH = "May",
-            YEAR = "1998",
-            DATE_OF_BIRTH = DAY + " " + MONTH + "," + YEAR,
-            SUBJECT = "English",
-            HOBBIES = "Sports",
             NAME_PICTURE = "milaya-mordashka-kotika.jpg",
-            CURRENT_ADDRESS = "ТАМБОВСКАЯ ОБЛАСТЬ УВАРОВСКИЙ Р-Н ГРИГОРЬЕВКА 2-Я",
-            STATE = "NCR",
-            CITY = "Delhi",
-            STATE_AND_CITY = STATE + " " + CITY;
+            CURRENT_ADDRESS = "ТАМБОВСКАЯ ОБЛАСТЬ УВАРОВСКИЙ Р-Н ГРИГОРЬЕВКА 2-Я";
 
-    @Test
-    public void formTest(){
+    @CsvFileSource(resources = "/testData.csv")
+    @ParameterizedTest(name = "Заполнение формы разными данными")
+    public void formTest(
+       String firstName,
+       String lastName,
+       String email,
+       String gender,
+       String number,
+       String day,
+       String month,
+       String year,
+       String subject,
+       String hobbies,
+       String state,
+       String city
+    )
+    {
+        String FIRST_AND_LAST_NAME = firstName + " " + lastName;
+        String DATE_OF_BIRTH = day + " " + month + "," + year;
+        String STATE_AND_CITY = state + " " + city;
+
         registrationPage.openPage()
-                .setFirstName(FIRST_NAME)
-                .setLastName(LAST_NAME)
-                .setEmail(EMAIL)
-                .setGender(GENDER)
-                .setMobileNumber(NUMBER)
-                .setDateOfBirth(DAY, MONTH, YEAR)
-                .setSubject(SUBJECT)
-                .setHobbies(HOBBIES)
+                .setFirstName(firstName)
+                .setLastName(lastName)
+                .setEmail(email)
+                .setGender(gender)
+                .setMobileNumber(number)
+                .setDateOfBirth(day, month, year)
+                .setSubject(subject)
+                .setHobbies(hobbies)
                 .uploadPicture(NAME_PICTURE)
                 .setCurrentAddress(CURRENT_ADDRESS)
-                .setState(STATE)
-                .setCity(CITY)
+                .setState(state)
+                .setCity(city)
                 .pressSubmit();
 
         registrationPage.resultsModal
                 .verifyResultsModalAppears()
                 .verifyResult("Student Name", FIRST_AND_LAST_NAME)
-                .verifyResult("Student Email", EMAIL)
-                .verifyResult("Gender", GENDER)
-                .verifyResult("Mobile", NUMBER)
+                .verifyResult("Student Email", email)
+                .verifyResult("Gender", gender)
+                .verifyResult("Mobile", number)
                 .verifyResult("Date of Birth", DATE_OF_BIRTH)
-                .verifyResult("Subjects", SUBJECT)
-                .verifyResult("Hobbies", HOBBIES)
+                .verifyResult("Subjects", subject)
+                .verifyResult("Hobbies", hobbies)
                 .verifyResult("Picture", NAME_PICTURE)
                 .verifyResult("Address", CURRENT_ADDRESS)
                 .verifyResult("State and City", STATE_AND_CITY);
-
-        System.out.println();
     }
-
-
 }

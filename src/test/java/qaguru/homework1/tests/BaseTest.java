@@ -5,12 +5,15 @@ import com.codeborne.selenide.Selenide;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import qaguru.homework1.pages.RegistrationPage;
+import qaguru.homework1.testdata.TestData;
 
 
 public class BaseTest {
 
-    RegistrationPage registrationPage = new RegistrationPage();
+    RegistrationPage registrationPage;
+    TestData testData;
 
     @BeforeAll
     public static void setUp(){
@@ -22,6 +25,13 @@ public class BaseTest {
         Configuration.pageLoadStrategy = "none";
         Configuration.browserPosition = "0x0";
         Configuration.holdBrowserOpen = false;
+    }
+
+    @BeforeEach
+    public void init(){
+
+        registrationPage = new RegistrationPage();
+        testData = new TestData();
     }
 
     @AfterAll

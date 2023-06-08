@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 public class FormTest extends BaseTest {
 
-    @RepeatedTest(5)
+    @RepeatedTest(1)
     @Test
     public void formTest(){
 

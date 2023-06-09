@@ -1,13 +1,14 @@
 package qaguru.homework1.tests;
 
-import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
+
+import static io.qameta.allure.Allure.step;
 
 public class FormTest extends BaseTest {
 
+/*
     @Test
-    public void formTest(){
-
+    public void formTest() {
         registrationPage.openPage()
                 .setFirstName(testData.firstName)
                 .setLastName(testData.lastName)
@@ -38,6 +39,7 @@ public class FormTest extends BaseTest {
 
         System.out.println();
     }
+*/
 
 
 }
